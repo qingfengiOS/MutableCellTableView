@@ -34,15 +34,15 @@ static NSString *const kCellTwoIdentifier = @"QFCellTwo";
 
 #pragma mark - InitAppreaence
 - (void)initAppreaence {
-    QFModelOne *modelOne = [QFModelOne new];
-    QFModeTwo *modelTwo = [QFModeTwo new];
-    self.dataArray = @[modelOne,modelTwo,modelOne,modelTwo,modelTwo,modelOne];
+    [self.tableView registerClass:[QFCellOne class] forCellReuseIdentifier:kCellOneIdentifier];
+    [self.tableView registerClass:[QFCellTwo class] forCellReuseIdentifier:kCellTwoIdentifier];
 }
 
 #pragma mark - InitDataSource
 - (void)initDataSource {
-    [self.tableView registerClass:[QFCellOne class] forCellReuseIdentifier:kCellOneIdentifier];
-    [self.tableView registerClass:[QFCellTwo class] forCellReuseIdentifier:kCellTwoIdentifier];
+    QFModelOne *modelOne = [QFModelOne new];
+    QFModeTwo *modelTwo = [QFModeTwo new];
+    self.dataArray = @[modelOne,modelTwo,modelOne,modelTwo,modelTwo,modelOne];
 }
 
 #pragma mark - TableViewDelegate/dataSource

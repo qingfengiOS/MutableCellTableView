@@ -14,6 +14,9 @@
 
 @implementation AppDelegate
 
+- (void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
