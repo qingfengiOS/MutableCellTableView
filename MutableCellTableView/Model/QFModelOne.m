@@ -18,11 +18,12 @@
     return @"副标题";
 }
 
+
 - (NSString *)identifier {
     return @"QFCellOne";
 }
 
 - (CGFloat)height {
-    return 80.0f;
+    return 65.0f;
 }
 @end

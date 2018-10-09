@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UILabel *ageLabel;
 @end
 
+extern NSString *kEventTwoName;
+
 @implementation QFCellTwo
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -43,11 +45,8 @@
 
 #pragma mark - Event Handle
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self routerEventWithName:@"QFCellTwo" userInfo:@{@"key2": @"value2"}];
+    [self routerEventWithName:kEventTwoName userInfo:@{@"keyTwo": @"valueTwo"}];
 }
 
-- (void)handleEvent:(HandleEventBlock)block{
-    
-}
 
 @end

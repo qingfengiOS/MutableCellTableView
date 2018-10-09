@@ -18,10 +18,11 @@
 		FD29E6162151DC5A00D91931 /* QFViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E6152151DC5A00D91931 /* QFViewModel.m */; };
 		FD29E6192151DC8600D91931 /* QFModelOne.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E6182151DC8600D91931 /* QFModelOne.m */; };
 		FD29E61C2151DC8F00D91931 /* QFModeTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E61B2151DC8F00D91931 /* QFModeTwo.m */; };
-		FD29E61F2151DD3B00D91931 /* QFBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E61E2151DD3B00D91931 /* QFBaseCell.m */; };
 		FD29E6252151DE5A00D91931 /* UIResponder+QFEventHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E6242151DE5A00D91931 /* UIResponder+QFEventHandle.m */; };
 		FD29E62D2151E0A300D91931 /* QFCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E62C2151E0A300D91931 /* QFCellOne.m */; };
 		FD29E6302151E0B000D91931 /* QFCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD29E62F2151E0B000D91931 /* QFCellTwo.m */; };
+		FD38C8AD216C88060015A18F /* QFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD38C8AB216C88060015A18F /* QFDetailViewController.m */; };
+		FD38C8AE216C88060015A18F /* QFDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD38C8AC216C88060015A18F /* QFDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,18 +65,17 @@
 		FD29E6182151DC8600D91931 /* QFModelOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFModelOne.m; sourceTree = "<group>"; };
 		FD29E61A2151DC8F00D91931 /* QFModeTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFModeTwo.h; sourceTree = "<group>"; };
 		FD29E61B2151DC8F00D91931 /* QFModeTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFModeTwo.m; sourceTree = "<group>"; };
-		FD29E61D2151DD3B00D91931 /* QFBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFBaseCell.h; sourceTree = "<group>"; };
-		FD29E61E2151DD3B00D91931 /* QFBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFBaseCell.m; sourceTree = "<group>"; };
 		FD29E6202151DDCE00D91931 /* QFViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFViewProtocol.h; sourceTree = "<group>"; };
 		FD29E6212151DDF900D91931 /* QFModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFModelProtocol.h; sourceTree = "<group>"; };
 		FD29E6232151DE5A00D91931 /* UIResponder+QFEventHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIResponder+QFEventHandle.h"; sourceTree = "<group>"; };
 		FD29E6242151DE5A00D91931 /* UIResponder+QFEventHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+QFEventHandle.m"; sourceTree = "<group>"; };
-		FD29E6292151DEBD00D91931 /* QFEventProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFEventProtocol.h; sourceTree = "<group>"; };
-		FD29E62A2151DECC00D91931 /* QFViewModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFViewModelProtocol.h; sourceTree = "<group>"; };
 		FD29E62B2151E0A300D91931 /* QFCellOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFCellOne.h; sourceTree = "<group>"; };
 		FD29E62C2151E0A300D91931 /* QFCellOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFCellOne.m; sourceTree = "<group>"; };
 		FD29E62E2151E0B000D91931 /* QFCellTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFCellTwo.h; sourceTree = "<group>"; };
 		FD29E62F2151E0B000D91931 /* QFCellTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFCellTwo.m; sourceTree = "<group>"; };
+		FD38C8AA216C88060015A18F /* QFDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFDetailViewController.h; sourceTree = "<group>"; };
+		FD38C8AB216C88060015A18F /* QFDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFDetailViewController.m; sourceTree = "<group>"; };
+		FD38C8AC216C88060015A18F /* QFDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QFDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +186,9 @@
 			children = (
 				FD29E6102151DC3C00D91931 /* ViewController.h */,
 				FD29E60F2151DC3C00D91931 /* ViewController.m */,
+				FD38C8AA216C88060015A18F /* QFDetailViewController.h */,
+				FD38C8AB216C88060015A18F /* QFDetailViewController.m */,
+				FD38C8AC216C88060015A18F /* QFDetailViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,8 +198,6 @@
 			children = (
 				FD29E6202151DDCE00D91931 /* QFViewProtocol.h */,
 				FD29E6212151DDF900D91931 /* QFModelProtocol.h */,
-				FD29E6292151DEBD00D91931 /* QFEventProtocol.h */,
-				FD29E62A2151DECC00D91931 /* QFViewModelProtocol.h */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -204,8 +205,6 @@
 		FD29E6122151DC3C00D91931 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FD29E61D2151DD3B00D91931 /* QFBaseCell.h */,
-				FD29E61E2151DD3B00D91931 /* QFBaseCell.m */,
 				FD29E62B2151E0A300D91931 /* QFCellOne.h */,
 				FD29E62C2151E0A300D91931 /* QFCellOne.m */,
 				FD29E62E2151E0B000D91931 /* QFCellTwo.h */,
@@ -327,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD38C8AE216C88060015A18F /* QFDetailViewController.xib in Resources */,
 				FD29E5E72151DB7400D91931 /* LaunchScreen.storyboard in Resources */,
 				FD29E5E42151DB7400D91931 /* Assets.xcassets in Resources */,
 				FD29E5E22151DB7300D91931 /* Main.storyboard in Resources */,
@@ -355,12 +355,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD29E6132151DC3C00D91931 /* ViewController.m in Sources */,
+				FD38C8AD216C88060015A18F /* QFDetailViewController.m in Sources */,
 				FD29E62D2151E0A300D91931 /* QFCellOne.m in Sources */,
 				FD29E6192151DC8600D91931 /* QFModelOne.m in Sources */,
 				FD29E5EA2151DB7400D91931 /* main.m in Sources */,
 				FD29E61C2151DC8F00D91931 /* QFModeTwo.m in Sources */,
 				FD29E6302151E0B000D91931 /* QFCellTwo.m in Sources */,
-				FD29E61F2151DD3B00D91931 /* QFBaseCell.m in Sources */,
 				FD29E6162151DC5A00D91931 /* QFViewModel.m in Sources */,
 				FD29E6252151DE5A00D91931 /* UIResponder+QFEventHandle.m in Sources */,
 				FD29E5DC2151DB7300D91931 /* AppDelegate.m in Sources */,

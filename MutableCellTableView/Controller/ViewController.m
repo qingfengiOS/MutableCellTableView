@@ -7,73 +7,74 @@
 //
 
 #import "ViewController.h"
-
-#import "QFCellOne.h"
-#import "QFCellTwo.h"
+#import "QFDetailViewController.h"
 
 #import "QFViewModel.h"
 
-#import "QFViewProtocol.h"
-
 #import "UIResponder+QFEventHandle.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+/// ViewModel
 @property (nonatomic, strong) QFViewModel *viewModel;
+
+/// 事件策略字典 key:事件名 value:事件的invocation对象
+@property (nonatomic, strong) NSDictionary *eventStrategy;
+
 @end
-static NSString *const kCellOneIdentifier = @"QFCellOne";
-static NSString *const kCellTwoIdentifier = @"QFCellTwo";
+
+NSString *const kEventOneName = @"QFCellOneEvent";
+NSString *const kEventTwoName = @"QFCellTwoEvent";
+
 @implementation ViewController
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self initAppreaence];
-    
 }
 
 #pragma mark - InitAppreaence
 - (void)initAppreaence {
-    [self.tableView registerClass:[QFCellOne class] forCellReuseIdentifier:kCellOneIdentifier];
-    [self.tableView registerClass:[QFCellTwo class] forCellReuseIdentifier:kCellTwoIdentifier];
+    [self.view addSubview:self.viewModel.tableView];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.viewModel numberOfSections];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.viewModel numberOfRowsInSection:section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id<QFModelProtocol> model = [self.viewModel modelForRowAtIndexPath:indexPath];
-    id<QFViewProtocol> cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
-    [cell configCellDateByModel:model];
-    return (UITableViewCell *)cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.viewModel heightForRowAtIndexPath:indexPath];
-}
-
+#pragma mark - Event Response
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
+    // 处理事件
     [self handleEventWithName:eventName parameter:userInfo];
     
-    // ？？？？？
+    // 把响应链继续传递下去
     [super routerEventWithName:eventName userInfo:userInfo];
 }
 
 - (void)handleEventWithName:(NSString *)eventName parameter:(NSDictionary *)parameter {
-    if ([eventName isEqualToString:@"QFCellOne"]) {
-        NSLog(@"~~~~~~~~~QFCellOne~~~~~~~~~\n paramter: %@",parameter);
-    }
-    
-    if ([eventName isEqualToString:@"QFCellTwo"]) {
-        NSLog(@"~~~~~~~~~QFCellTwo~~~~~~~~~\n paramter: %@",parameter);
-    }
+    // 获取invocation对象
+    NSInvocation *invocation = self.strategyDictionary[eventName];
+    // 设置invocation参数
+    [invocation setArgument:&parameter atIndex:2];
+    // 调用方法
+    [invocation invoke];
 }
+
+- (void)cellOneEventWithParamter:(NSDictionary *)paramter {
+    NSLog(@"第一种cell事件---------参数：%@",paramter);
+    QFDetailViewController *viewController = [QFDetailViewController new];
+    viewController.typeName = @"Cell类型一";
+    viewController.paramterDic = paramter;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)cellTwoEventWithParamter:(NSDictionary *)paramter {
+    NSLog(@"第二种cell事件---------参数：%@",paramter);
+    QFDetailViewController *viewController = [QFDetailViewController new];
+    viewController.typeName = @"Cell类型二";
+    viewController.paramterDic = paramter;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
 
 #pragma mark - Getters
 - (QFViewModel *)viewModel {
@@ -81,5 +82,15 @@ static NSString *const kCellTwoIdentifier = @"QFCellTwo";
         _viewModel = QFViewModel.new;
     }
     return _viewModel;
+}
+
+- (NSDictionary <NSString *, NSInvocation *>*)strategyDictionary {
+    if (!_eventStrategy) {
+        _eventStrategy = @{
+                           kEventOneName:[self createInvocationWithSelector:@selector(cellOneEventWithParamter:)],
+                           kEventTwoName:[self createInvocationWithSelector:@selector(cellTwoEventWithParamter:)]
+                           };
+    }
+    return _eventStrategy;
 }
 @end

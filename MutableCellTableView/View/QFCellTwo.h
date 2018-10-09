@@ -6,8 +6,9 @@
 //  Copyright © 2018年 qingfengiOS. All rights reserved.
 //
 
-#import "QFBaseCell.h"
+#import <UIKit/UIKit.h>
+#import "QFViewProtocol.h"
 
-@interface QFCellTwo : QFBaseCell
+@interface QFCellTwo : UITableViewCell<QFViewProtocol>
 
 @end

@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "QFModelProtocol.h"
-#import "QFEventProtocol.h"
 
+/**
+ 协议用于保存每个cell的数据源设置方法，也可以不用，直接在每个类型的cell头文件中定义，考虑到开放封闭原则，建议使用
+ */
 @protocol QFViewProtocol <NSObject>
 
 /**
@@ -18,4 +20,5 @@
  @param model model
  */
 - (void)configCellDateByModel:(id<QFModelProtocol>)model;
+
 @end

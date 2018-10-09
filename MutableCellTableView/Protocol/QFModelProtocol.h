@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ 协议用于保存每个model对应cell的重用标志符和行高，也可以不使用这个协议 直接在对一个的model里指明
+ */
 @protocol QFModelProtocol <NSObject>
-@optional
+
 - (NSString *)identifier;
+
 - (CGFloat)height;
+
 @end

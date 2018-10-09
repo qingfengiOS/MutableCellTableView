@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UILabel *subLabel;
 @end
 
+extern NSString *kEventOneName;
+
 @implementation QFCellOne
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -45,11 +47,8 @@
 
 #pragma mark - Event Handle
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self routerEventWithName:@"QFCellOne" userInfo:@{@"key": @"value"}];
+    [self routerEventWithName:kEventOneName userInfo:@{@"keyOne": @"valueOne"}];
 }
 
-- (void)handleEvent:(HandleEventBlock)block{
-    
-}
 
 @end

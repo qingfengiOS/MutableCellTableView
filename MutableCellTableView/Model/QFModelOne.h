@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "QFModelProtocol.h"
 
-@interface QFModelOne : NSObject <QFModelProtocol>
+@interface QFModelOne : NSObject 
 
 @property (nonatomic, copy) NSString *titleString;
 @property (nonatomic, copy) NSString *subTitleString;

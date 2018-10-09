@@ -6,9 +6,11 @@
 //  Copyright © 2018年 qingfengiOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "QFViewModelProtocol.h"
+#import <UIKit/UIKit.h>
 
-@interface QFViewModel : NSObject<QFViewModelProtocol>
+@interface QFViewModel : NSObject
+
+/// 暴露一个tableView的属性 提供Controller使用
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
