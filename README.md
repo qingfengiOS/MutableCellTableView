@@ -1,5 +1,3 @@
-# MutableCellTableView
-多种tableViewCell的实现方案，拒绝if-else
 ## 前言 
 在iOS开发中，常见的MVC中,复杂界面的Controller中的代码极其臃肿，动则上千行的代码量对后期维护简直是一种灾难，因此MVC也被调侃为Messive ViewController,特别是有多种类型Cell的TableView存在时，在```-tableView:cellForRowAtIndexPath:```代理方法中充斥着大量的if-else分支，这次我们尝试用一种新的方式来“优雅”地实现这个方法。  
 
@@ -10,7 +8,7 @@
 这相当于借用responder chain实现了一个自己的事件传递链。这在事件需要层层传递的时候特别好用，然而这种对象交互方式的有效场景仅限于在responder chain上的UIResponder对象上。  
 
 ## 二、MVVM分离逻辑，解耦
-网上关于MVVM的文章很多而且每个人的理解可能都有小小的差别，这里不做赘述，这里说说我在项目中所用到的MVVM，如果错误，请看官多多指教。我的tableView定义在ViewModel中，其代理方法也在ViewModel实现：  
+网上关于MVVM的文章很多而且每个人的理解可能都有小小的差别，这里不做赘述，这里说说我在项目中所用到的MVVM，如果错误，请看官多多指教。我的tableView定义在Controller中，其代理方法也在Contriller实现，ViewModel为其提供必要的数据：  
 
 头文件中：  
 
@@ -19,8 +17,9 @@
 
 @interface QFViewModel : NSObject
 
-/// 暴露一个tableView的属性 提供Controller使用
-@property (nonatomic, strong) UITableView *tableView;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
+
+- (id<QFModelProtocol>)tableView:(UITableView *)tableView itemForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 ```
@@ -28,16 +27,13 @@
 实现文件中两个关键方法： 
 
 ```
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id<QFModelProtocol> model = self.dataArray[indexPath.row];
-    id<QFViewProtocol> cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
-    [cell configCellDateByModel:model];
-    return (UITableViewCell *)cell;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section {
+    return self.dataArray.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (id<QFModelProtocol>)tableView:(UITableView *)tableView itemForRowAtIndexPath:(NSIndexPath *)indexPath {
     id<QFModelProtocol> model = self.dataArray[indexPath.row];
-    return model.height;
+    return model;
 }
 ```
 这里用到了协议Protocol做解耦，两个协议，一个视图层的协议```QFViewProtocol```，一个模型的协议```QFModelProtocol```  
@@ -73,11 +69,13 @@
 
 @end
 ```
-在控制器层中直接addSubView： 
+在控制器层中直接创建并且addSubView： 
 
 ```
 - (void)initAppreaence {
-    [self.view addSubview:self.viewModel.tableView];
+    [self.tableView registerClass:[QFCellOne class] forCellReuseIdentifier:kCellOneIdentifier];
+    [self.tableView registerClass:[QFCellTwo class] forCellReuseIdentifier:kCellTwoIdentifier];
+    [self.view addSubview:self.tableView];
 }
 ```
 
@@ -226,7 +224,9 @@
 - NSInvocation的使用及消息转发机制   
 
 [Demo演示](https://github.com/qingfengiOS/MutableCellTableView)  
-有任何意见和建议欢迎交流指导，如果可以，请顺手给个star。
+有任何意见和建议欢迎交流指导，如果可以，请顺手给个star。  
 
-最后，感谢[Casa大佬](https://casatwy.com)的分享！  
+感谢评论区各位的赐教，纠正了我把tableView定义在VM中的颠覆性错误！
+
+最后，万分感谢[Casa大佬](https://casatwy.com)的分享！  
 [一种基于ResponderChain的对象交互方式](https://casatwy.com/responder_chain_communication.html#seg3) 
