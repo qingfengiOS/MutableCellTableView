@@ -11,11 +11,15 @@
 
 #import "QFViewModel.h"
 
+#import "QFCellOne.h"
+#import "QFCellTwo.h"
+
 #import "UIResponder+QFEventHandle.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+/// tableView
+@property (nonatomic, strong) UITableView *tableView;
 
 /// ViewModel
 @property (nonatomic, strong) QFViewModel *viewModel;
@@ -28,6 +32,9 @@
 NSString *const kEventOneName = @"QFCellOneEvent";
 NSString *const kEventTwoName = @"QFCellTwoEvent";
 
+static NSString *const kCellOneIdentifier = @"QFCellOne";
+static NSString *const kCellTwoIdentifier = @"QFCellTwo";
+
 @implementation ViewController
 
 #pragma mark - Life Cycle
@@ -38,7 +45,9 @@ NSString *const kEventTwoName = @"QFCellTwoEvent";
 
 #pragma mark - InitAppreaence
 - (void)initAppreaence {
-    [self.view addSubview:self.viewModel.tableView];
+    [self.tableView registerClass:[QFCellOne class] forCellReuseIdentifier:kCellOneIdentifier];
+    [self.tableView registerClass:[QFCellTwo class] forCellReuseIdentifier:kCellTwoIdentifier];
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - Event Response
@@ -75,6 +84,18 @@ NSString *const kEventTwoName = @"QFCellTwoEvent";
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.viewModel numberOfRowsInSection:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    id <QFModelProtocol> model = [self.viewModel tableView:tableView itemForRowAtIndexPath:indexPath];
+    id cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
+    [cell configCellDateByModel:model];
+    return cell;
+}
+
 
 #pragma mark - Getters
 - (QFViewModel *)viewModel {
@@ -93,4 +114,17 @@ NSString *const kEventTwoName = @"QFCellTwoEvent";
     }
     return _eventStrategy;
 }
+
+
+#pragma mark - Getters
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableFooterView = [[UIView alloc] init];
+    }
+    return _tableView;
+}
+
 @end

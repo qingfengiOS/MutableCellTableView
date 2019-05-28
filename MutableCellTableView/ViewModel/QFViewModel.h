@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QFModelProtocol.h"
 
 @interface QFViewModel : NSObject
 
-/// 暴露一个tableView的属性 提供Controller使用
-@property (nonatomic, strong) UITableView *tableView;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
 
+- (id<QFModelProtocol>)tableView:(UITableView *)tableView itemForRowAtIndexPath:(NSIndexPath *)indexPath;
 @end
